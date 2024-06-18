@@ -1,0 +1,58 @@
+@import "./variables";
+
+//page title
+.text-1, h2 {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--text-primary-color);
+}
+
+//big title
+.text-2, h3 {
+  font-size: 1.125rem;
+  font-weight: bold;
+  color: var(--text-primary-color);
+}
+
+//regular title
+.text-3, h4 {
+  font-size: 0.875rem;
+  font-weight: bold;
+  color: var(--text-primary-color);
+}
+
+//small title 
+.text-4, h5 {
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: var(--text-primary-color);
+}
+
+//description of title
+.text-5 {
+  font-size: 0.75rem;
+  font-weight: normal;
+  color: var(--text-secondary-color);
+}
+
+//regular paragraph
+.text-6, p {
+  font-size: 0.875rem;
+  font-weight: normal;
+  color: var(--text-primary-color);
+}
+
+//sub paragraph
+.text-7 {
+  font-size: 0.75rem;
+  font-weight: normal;
+  color: var(--text-primary-color);
+}
+
+p {
+  margin-bottom: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-bottom: 0;
+}

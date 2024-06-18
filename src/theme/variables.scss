@@ -1,0 +1,30 @@
+@function setOpacity($color, $opacity) {
+    $transparentPercent: percentage(1 - $opacity);
+    @return color-mix(in srgb, $color, transparent $transparentPercent);
+}
+
+// Break points / screen sizes
+$mobile-s-size: 320px;
+$mobile-m-size: 375px;
+$mobile-l-size: 425px;
+$tablet-size: 768px;
+$mobile-break-point: 576px;
+$tablet-break-point: 800px;
+
+// Box shadows
+$button-box-shadow: 0 1px 1px var(--shadow-solid);
+$solid-drop-shadow: 0 3px 3px var(--shadow-solid);
+$strong-drop-shadow: 0 3px 6px var(--shadow-strong);
+$primary-box-shadow: 0 2px 3px var(--shadow-solid);
+
+// Validations
+$input-error-font-size: 0.625rem;
+
+// Icon color filters
+$icon-white:       var(--icon-white);
+$icon-strong-gray: var(--icon-strong-gray);
+$icon-light-gray:  var(--icon-light-gray);
+$icon-default-blue:var(--icon-default-blue);
+$icon-red:         var(--icon-red);
+
+$default-border-radios: 5px;

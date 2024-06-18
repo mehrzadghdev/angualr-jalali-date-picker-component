@@ -1,0 +1,108 @@
+<div class="auth-auth-container register-container">
+    <div class="auth-auth-form">
+        <div class="columns">
+            <div class="logo">
+                <img src="../../../assets/images/logo.png" alt="logo">
+                <h2>نرم افزار واسط کلید</h2>
+            </div>
+            <div class="back">
+                <a routerLink="/home">بازگشت</a>
+            </div>
+        </div>
+        <div class="auth-title">
+            <h3>ساخت حساب کاربری</h3>
+            <br>
+            <form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+                <div class="two-colums-input">
+                    <mat-form-field appearance="outline">
+                        <mat-label>نام</mat-label>
+                        <input type="text" matInput formControlName="name">
+                        <mat-error *ngIf="registerControl('name')?.hasError('required') && validateForm">
+                            این فیلد ضروریست
+                        </mat-error>
+                        <mat-icon matSuffix class="field-icon icon-medium">person</mat-icon>
+                    </mat-form-field>
+
+                    <div class="gap-between"></div>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>نام خانوادگی</mat-label>
+                        <input type="text" matInput formControlName="family">
+                        <mat-error *ngIf="registerControl('family')?.hasError('required') && validateForm">
+                            این فیلد ضروریست
+                        </mat-error>
+                        <mat-icon matSuffix class="field-icon icon-medium">badge</mat-icon>
+                    </mat-form-field>
+                </div>
+
+                <div class="two-colums-input">
+                    <mat-form-field appearance="outline">
+                        <mat-label>آدرس ایمیل</mat-label>
+                        <input type="email" matInput formControlName="email">
+                        <mat-error *ngIf="registerControl('email')?.hasError('required') && validateForm">
+                            این فیلد ضروریست
+                        </mat-error>
+                        <mat-error *ngIf="registerControl('email')?.hasError('email') && validateForm">
+                            ایمیل نامعتبر است
+                        </mat-error>
+                        <mat-icon matSuffix class="field-icon icon-medium">mail</mat-icon>
+                    </mat-form-field>
+
+                    <div class="gap-between"></div>
+
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>شماره همراه</mat-label>
+                        <input type="number" matInput formControlName="phone">
+                        <mat-error *ngIf="registerControl('phone')?.hasError('required') && validateForm">
+                            این فیلد ضروریست
+                        </mat-error>
+                        <mat-icon matSuffix class="field-icon icon-medium">call</mat-icon>
+                    </mat-form-field>
+                </div>
+
+                <div class="two-colums-input">
+                    <mat-form-field appearance="outline">
+                        <mat-label>رمز عبور</mat-label>
+                        <input [type]="passwordVisible ? 'text' : 'password'" matInput formControlName="password">
+                        <mat-error *ngIf="registerControl('password')?.hasError('required') && validateForm">
+                            این فیلد ضروریست
+                        </mat-error>
+                        <mat-icon matSuffix class="field-icon icon-medium pointer" matRipple
+                            (mousedown)="passwordVisible = true" (mouseup)="passwordVisible = false">
+                            <ng-container *ngIf="passwordVisible">visibility</ng-container>
+                            <ng-container *ngIf="!passwordVisible">visibility_off</ng-container>
+                        </mat-icon>
+                    </mat-form-field>
+
+                    <div class="gap-between"></div>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>تایید رمز عبور</mat-label>
+                        <input [type]="passwordVisible ? 'text' : 'password'" matInput
+                            formControlName="confirmPassword">
+                        <mat-error *ngIf="registerControl('confirmPassword')?.hasError('required') && validateForm">
+                            این فیلد ضروریست
+                        </mat-error>
+                        <mat-error *ngIf="registerControl('confirmPassword')?.hasError('passwordMismatch') && validateForm">
+                            رمز عبور مطابقت ندارد
+                        </mat-error>
+                        <mat-icon matSuffix class="field-icon icon-medium pointer" matRipple
+                            (mousedown)="passwordVisible = true" (mouseup)="passwordVisible = false">
+                            <ng-container *ngIf="passwordVisible">visibility</ng-container>
+                            <ng-container *ngIf="!passwordVisible">visibility_off</ng-container>
+                        </mat-icon>
+                    </mat-form-field>
+                </div>
+
+                <button type="submit" matRipple class="primary-button block-button submit-button"
+                    [disabled]="registerLoading" [ngClass]="{'button-loading': registerLoading}">
+                    <div class="button-content">ساخت حساب کاربری</div>
+                </button>
+                <button type="button" matRipple class="stroked-button block-button forget-password">فراموشی رمز
+                    عبور</button>
+                <span class="other-option-link">حساب کاربری دارید؟<a routerLink="/auth/login">ورود</a></span>
+            </form>
+        </div>
+    </div>
+</div>
