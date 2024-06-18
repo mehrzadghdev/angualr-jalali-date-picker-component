@@ -8,7 +8,7 @@
     width: 60px;
     color: #ffffff;
     transition: width .5s ease;
-    background-color: #2B3A4A;
+    background-color: #252B36;
     z-index: 1000;
 
     &.active {
@@ -61,7 +61,7 @@
                     }
 
                     .accordion-header {
-                        background-color: #2B3A4A;
+                        background-color: #1F232E;
                     }
 
                     .nav-item__icon {
@@ -126,7 +126,7 @@
                 }
 
                 .accordion-header {
-                    background-color: #263442;
+                    background-color: #1F232E;
                 }
 
                 .nav-item__title {
@@ -200,7 +200,7 @@
             }
 
             .person-icon {
-                background-color: #263442;
+                background-color: #2B2E3B;
                 min-width: 36px;
                 min-height: 36px;
                 display: flex;
@@ -311,7 +311,7 @@
                     border: none;
                     outline: none;
                     color: var(--text-secondary-color);
-                    transition: all .3s ease;
+                    transition: width .3s ease;
                     width: 200px;
 
                     &:focus {
