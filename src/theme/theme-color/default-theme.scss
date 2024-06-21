@@ -18,9 +18,9 @@
     --mariner: #008a77;
     --navy-blue: #008a77;
     --blue-primary: #008a77;
-    --blue-pale: #9ECFFF;
-    --blue-light: #E9F4FF;
-    --blue-light: #E9F4FF;
+    --blue-pale: #b3dcd6;
+    --blue-light: #b3d7d2;
+    --blue-light: #b3d7d2;
     --red-error: #FF4757;
     --yellow-warning: #FFA502;
     --tangerine: #FFC969;
@@ -184,4 +184,7 @@ body[theme='default'] {
     // Shadow Colors
     --shadow-solid: var(--black-12);
     --shadow-strong: var(--black-16);
+
+    // Box Shadows
+    --base-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
 }

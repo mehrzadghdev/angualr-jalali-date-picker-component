@@ -5,18 +5,32 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environment/environment';
 import * as moment from 'jalali-moment';
 import { Router } from '@angular/router';
+import { Company } from '../../company/types/company.type';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
+  private _company = localStorage.getItem("currentCompany");
   private _accessToken: string | null = null;
   private _tokenExpireDate: string | null = null;
+  
+  get company(): Company | "" {
+    if (this._company !== null) {
+      return JSON.parse(this._company);
+    }
+
+    return '';
+  }
+
+  set company(item: Company) {
+    localStorage.setItem("currentCompany", JSON.stringify(item));
+  }
 
   public get userLoggedIn(): boolean {
     const localExpireDate = localStorage.getItem("token-expire");
     const localToken = localStorage.getItem("auth-token");
-    
+
     if (localExpireDate !== null && localToken !== null && !this.isTokenExpired(localExpireDate)) {
       return true;
     }
@@ -49,6 +63,14 @@ export class AuthenticationService {
   }
 
   constructor(private http: HttpClient, private router: Router) { }
+
+  public currentCompanySelected(): boolean {
+    if (this._company && this._company !== null) {
+      return true
+    }
+
+    return false
+  }
 
   public authorize(): void {
     if (!this.userLoggedIn) {

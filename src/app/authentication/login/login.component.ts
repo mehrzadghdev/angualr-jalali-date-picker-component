@@ -40,11 +40,9 @@ export class LoginComponent {
           this.authentication.accessToken = result.accessToken;
           this.authentication.tokenExpireDate = result.expiresIn;
           this.loginLoading = false;
-          alert("login successfull")
-          this.router.navigate(['/home']);
+          this.router.navigate(['/software']);
         },
         error: () => {
-          alert("login was not successfull");
           this.loginLoading = false;
         }
       })

@@ -200,7 +200,7 @@
             }
 
             .person-icon {
-                background-color: #2B2E3B;
+                background-color: #2C313D;
                 min-width: 36px;
                 min-height: 36px;
                 display: flex;
@@ -374,6 +374,7 @@
 
     .panel-content {
         height: calc(100vh - 70px);
+        padding: 24px 12px;
         background-color: var(--background-color);
     }
 }

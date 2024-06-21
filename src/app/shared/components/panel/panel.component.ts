@@ -25,9 +25,7 @@ export class PanelComponent {
   constructor(
     private themeService: ThemeService,
     private authenticaton: AuthenticationService,
-  ) {
-    // this.authenticaton.authorize();
-  }
+  ) {}
 
   public onSearch(): void {
     if (this.searchQuery === "") {
@@ -54,10 +52,10 @@ export class PanelComponent {
   }
 
   public toggleAccordion(accordion: HTMLLIElement): void {
-    if (accordion.classList.contains("opened")) {
+    if (accordion.classList.contains("opened") && this.isExpanded) {
       accordion.classList.remove("opened");
     }
-    else {
+    else if (this.isExpanded) {
       accordion.classList.add("opened");
     }
   }

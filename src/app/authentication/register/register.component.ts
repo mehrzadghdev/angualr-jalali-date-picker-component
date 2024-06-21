@@ -70,21 +70,15 @@ export class RegisterComponent {
 							this.authentication.accessToken = loginResult.accessToken;
 							this.authentication.tokenExpireDate = loginResult.expiresIn;
 							this.registerLoading = false;
-							// this.utility.message("info", "ساخت حساب کاربری  با موفقیت انجام شد");
-							alert("account created successfully")
-							this.router.navigate(['/home']);
+							this.router.navigate(['/software']);
 						},
 						error: (err) => {
 							this.registerLoading = false;
-							alert("account created successfully")
-							// this.utility.message("info", "ساخت حساب کاربری  با موفقیت انجام شد");
 							this.router.navigate(['/auth/login']);
 						}
 					})
 				},
 				error: (err) => {
-					alert("register failed")
-					// this.utility.message("error", "کاربری با این ایمیل وجود دارد");
 					this.registerLoading = false;
 				}
 			})

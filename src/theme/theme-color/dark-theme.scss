@@ -23,7 +23,7 @@
     --green-positive-dark: #08D1B5;
 
     --dark-white: #FFFFFF;
-    --dark-blue-primary: #3D9EFF;
+    --dark-blue-primary: #40d6c2;
     --dark-red-error: #FF717D;
     --dark-yellow-warning: #FFA502;
     --dark-green-success: #54CC74;
@@ -179,4 +179,7 @@ body[theme='dark'] {
     // Shadow Colors
     --shadow-solid: var(--white-12);
     --shadow-strong: var(--white-16);
+
+    // Box Shadows
+    --base-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
 }

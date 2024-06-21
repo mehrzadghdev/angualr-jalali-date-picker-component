@@ -13,11 +13,19 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatBadgeModule } from '@angular/material/badge';
 import { FormsModule } from '@angular/forms';
- 
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { DialogService } from './services/dialog.service';
+import { LoadingComponent } from './components/loading/loading.component';
+import { LottieModule } from 'ngx-lottie';
+
+export function playerFactory() { 
+  return import('lottie-web'); 
+}  
 
 @NgModule({
   declarations: [
-    PanelComponent
+    PanelComponent,
+    LoadingComponent
   ],
   imports: [
     CommonModule,
@@ -26,10 +34,20 @@ import { FormsModule } from '@angular/forms';
     MatRippleModule,
     MatMenuModule,
     FormsModule,
-    MatBadgeModule
+    MatBadgeModule,
+    MatDialogModule,
+    LottieModule.forRoot({ player: playerFactory })
+  ],
+  providers: [
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    },
+    DialogService
   ],
   exports: [
-    PanelComponent
+    PanelComponent,
+    LoadingComponent
   ] 
 })
 export class SharedModule { }

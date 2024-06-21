@@ -11,7 +11,8 @@
     </div>
     <ul class="panel-sidebar__menu">
         <li class="menu-title">منو اصلی</li>
-        <li class="nav-item accordion opened" #companyAccordion (click)="toggleAccordion(companyAccordion)">
+        <li class="nav-item accordion opened" #companyAccordion (click)="toggleAccordion(companyAccordion)"
+            [mat-menu-trigger-for]="!isExpanded ? companyMenu : null">
             <div class="accordion-header" matRipple>
                 <div class="accordion-title">
                     <div class="nav-item__icon">
@@ -25,11 +26,16 @@
             </div>
             <ul class="accordion-content" (click)="$event.stopPropagation()">
                 <li matRipple class="unselectable">ایجاد شرکت جدید</li>
-                <li matRipple class="unselectable">تنظیمات شرکت</li>
                 <li matRipple class="unselectable">لیست تمام شرکت ها</li>
             </ul>
-        </li>  
-        <li class="nav-item accordion" #contactAccordion (click)="toggleAccordion(contactAccordion)">
+        </li>
+        <mat-menu #companyMenu="matMenu" xPosition="before">
+            <button mat-menu-item>ایجاد شرکت جدید</button>
+            <button mat-menu-item>لیست تمام شرکت ها</button>
+        </mat-menu>
+
+        <li class="nav-item accordion" #contactAccordion (click)="toggleAccordion(contactAccordion)"
+            [mat-menu-trigger-for]="!isExpanded ? contactMenu : null">
             <div class="accordion-header" matRipple>
                 <div class="accordion-title">
                     <div class="nav-item__icon">
@@ -45,8 +51,14 @@
                 <li matRipple class="unselectable">ایجاد طرف حساب جدید</li>
                 <li matRipple class="unselectable">لیست تمام طرف حساب ها</li>
             </ul>
-        </li>  
-        <li class="nav-item accordion" #productAccordion (click)="toggleAccordion(productAccordion)">
+        </li>
+        <mat-menu #contactMenu="matMenu" xPosition="before">
+            <button mat-menu-item>ایجاد طرف حساب جدید</button>
+            <button mat-menu-item>لیست تمام طرف حساب ها</button>
+        </mat-menu>
+
+        <li class="nav-item accordion" #productAccordion (click)="toggleAccordion(productAccordion)"
+            [mat-menu-trigger-for]="!isExpanded ? productMenu : null">
             <div class="accordion-header" matRipple>
                 <div class="accordion-title">
                     <div class="nav-item__icon">
@@ -62,8 +74,14 @@
                 <li matRipple class="unselectable">ایجاد کالای جدید</li>
                 <li matRipple class="unselectable">لیست تمام کالا ها</li>
             </ul>
-        </li>        
-        <li class="nav-item accordion" #factorAccordion (click)="toggleAccordion(factorAccordion)">
+        </li>
+        <mat-menu #productMenu="matMenu" xPosition="before">
+            <button mat-menu-item>ایجاد کالای جدید</button>
+            <button mat-menu-item>لیست تمام کالا ها</button>
+        </mat-menu>
+
+        <li class="nav-item accordion" #factorAccordion (click)="toggleAccordion(factorAccordion)"
+            [mat-menu-trigger-for]="!isExpanded ? factor : null">
             <div class="accordion-header" matRipple>
                 <div class="accordion-title">
                     <div class="nav-item__icon">
@@ -79,8 +97,14 @@
                 <li matRipple class="unselectable">ایجاد فاکتور جدید</li>
                 <li matRipple class="unselectable">لیست تمام فاکتور ها</li>
             </ul>
-        </li>  
-        <li class="nav-item accordion" #unitAccordion (click)="toggleAccordion(unitAccordion)">
+        </li>
+        <mat-menu #factor="matMenu" xPosition="before">
+            <button mat-menu-item>ایجاد فاکتور جدید</button>
+            <button mat-menu-item>لیست تمام فاکتور ها</button>
+        </mat-menu>
+
+        <li class="nav-item accordion" #unitAccordion (click)="toggleAccordion(unitAccordion)"
+            [mat-menu-trigger-for]="!isExpanded ? unitMenu : null">
             <div class="accordion-header" matRipple>
                 <div class="accordion-title">
                     <div class="nav-item__icon">
@@ -96,7 +120,11 @@
                 <li matRipple class="unselectable">ایجاد واحد جدید</li>
                 <li matRipple class="unselectable">لیست تمام واحد ها</li>
             </ul>
-        </li>        
+        </li>
+        <mat-menu #unitMenu="matMenu" xPosition="before">
+            <button mat-menu-item>ایجاد واحد جدید</button>
+            <button mat-menu-item>لیست تمام واحد ها</button>
+        </mat-menu>
     </ul>
 </div>
 
@@ -106,7 +134,8 @@
             <mat-icon *ngIf="!isExpanded">menu_open</mat-icon>
             <mat-icon *ngIf="isExpanded">menu_closed</mat-icon>
         </div>
-        <button matRipple [matMenuTriggerFor]="createMenu" class="create-button">ایجاد کردن <mat-icon>keyboard_arrow_down</mat-icon></button>
+        <button matRipple [matMenuTriggerFor]="createMenu" class="create-button">ایجاد کردن
+            <mat-icon>keyboard_arrow_down</mat-icon></button>
         <mat-menu #createMenu="matMenu">
             <button mat-menu-item>شرکت</button>
             <button mat-menu-item>طرف حساب</button>
@@ -115,15 +144,16 @@
         </mat-menu>
         <div class="search-box">
             <form class="search-form" (ngSubmit)="onSearch()">
-                <input placeholder="جستجو کردن..." type="text" class="search" [(ngModel)]="searchQuery" name="search-input">
+                <input placeholder="جستجو کردن..." type="text" class="search" [(ngModel)]="searchQuery"
+                    name="search-input">
                 <button class="icon-light search-icon">
                     <mat-icon>search</mat-icon>
                 </button>
             </form>
         </div>
         <div class="theme-select" mat-ripple [mat-menu-trigger-for]="themeMenu">
-            <ng-container *ngIf="currentTheme === 'default'">پیش فرض</ng-container> 
-            <ng-container *ngIf="currentTheme === 'dark'">تاریک</ng-container> 
+            <ng-container *ngIf="currentTheme === 'default'">پیش فرض</ng-container>
+            <ng-container *ngIf="currentTheme === 'dark'">تاریک</ng-container>
             <mat-icon>keyboard_arrow_down</mat-icon>
         </div>
         <mat-menu #themeMenu="matMenu">
@@ -158,5 +188,7 @@
             <mat-icon>settings</mat-icon>
         </div>
     </div>
-    <div class="panel-content"></div>
+    <div class="panel-content">
+        <ng-content></ng-content>
+    </div>
 </div>
