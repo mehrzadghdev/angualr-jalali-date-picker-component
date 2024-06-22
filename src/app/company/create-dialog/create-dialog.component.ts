@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CompanyService } from '../services/company.service';
 import { AddCompanyBody } from '../types/company.type';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 
 @Component({
   selector: 'app-create-dialog',
@@ -17,16 +18,17 @@ export class CreateDialogComponent {
     private fb: FormBuilder,
     private dialogRef: MatDialogRef<CreateDialogComponent>,
     private companyService: CompanyService,
-    @Inject(MAT_DIALOG_DATA) public data: { firstCompany: boolean }
+    private authentication: AuthenticationService,
+    @Inject(MAT_DIALOG_DATA) public data: { firstCompany?: boolean, disableClose?: boolean }
   ) {
     this.addCompanyForm = fb.group({
       companyName: ['', Validators.required],
       taxIdentity: ['', Validators.required],
       privateKey: ['', Validators.required],
-      companyZipCode: ['', Validators.required],
-      companyAddress: ['', Validators.required],
-      companyTel: ['', Validators.required],
-      companyBranchNo: ['', Validators.required],
+      companyZipCode: [''],
+      companyAddress: [''],
+      companyTel: [''],
+      companyBranchNo: ['', Validators.maxLength(4)],
       companyStatus: [data.firstCompany ? true : false, Validators.required],
       companyDesc: ['', Validators.required]
     })
@@ -37,7 +39,13 @@ export class CreateDialogComponent {
   }
 
   public setStep(step: 'welcome' | 'base' | 'information' | 'tax') {
-    this.addCompanyStep = step;
+    if (step == 'information' && (this.addCompanyForm.get("companyName")?.invalid || this.addCompanyForm.get("companyDesc")?.invalid)) {
+      this.addCompanyForm.get("companyName")?.markAsTouched();
+      this.addCompanyForm.get("companyDesc")?.markAsTouched();
+    }
+    else {
+      this.addCompanyStep = step
+    }
   }
 
   public onAddCompany(): void {
@@ -56,7 +64,8 @@ export class CreateDialogComponent {
       }
       
       this.companyService.addCompany(addCompanyBody).subscribe(res => {
-        console.log(res);
+        this.authentication.currentCompany = res;
+        this.dialogRef.close();
       })
     }
     else {

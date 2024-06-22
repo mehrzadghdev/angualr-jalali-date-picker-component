@@ -2,6 +2,8 @@ import { Component, HostListener } from '@angular/core';
 import { ThemeService } from '../../services/theme.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Theme } from '../../types/theme.type';
+import { DialogService } from '../../services/dialog.service';
+import { SelectDialogComponent } from 'src/app/company/select-dialog/select-dialog.component';
 
 @Component({
   selector: 'app-panel',
@@ -25,6 +27,7 @@ export class PanelComponent {
   constructor(
     private themeService: ThemeService,
     private authenticaton: AuthenticationService,
+    private dialog: DialogService
   ) {}
 
   public onSearch(): void {
@@ -58,5 +61,13 @@ export class PanelComponent {
     else if (this.isExpanded) {
       accordion.classList.add("opened");
     }
+  }
+
+  public onReSelectCompany(): void {
+    this.dialog.openFullScreenDialog(SelectDialogComponent, {
+      data: {
+        reSelect: true
+      }
+    })
   }
 }

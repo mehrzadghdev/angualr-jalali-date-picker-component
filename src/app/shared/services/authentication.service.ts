@@ -11,11 +11,11 @@ import { Company } from '../../company/types/company.type';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private _company = localStorage.getItem("currentCompany");
+  private _company = localStorage.getItem("current-company");
   private _accessToken: string | null = null;
   private _tokenExpireDate: string | null = null;
   
-  get company(): Company | "" {
+  get currentCompany(): Company | "" {
     if (this._company !== null) {
       return JSON.parse(this._company);
     }
@@ -23,8 +23,8 @@ export class AuthenticationService {
     return '';
   }
 
-  set company(item: Company) {
-    localStorage.setItem("currentCompany", JSON.stringify(item));
+  set currentCompany(item: Company) {
+    localStorage.setItem("current-company", JSON.stringify(item));
   }
 
   public get userLoggedIn(): boolean {
@@ -46,6 +46,7 @@ export class AuthenticationService {
     }
 
     this.clearAccessToken();
+    this.clearCurrentCompany();
     return null;
   }
 
@@ -75,6 +76,7 @@ export class AuthenticationService {
   public authorize(): void {
     if (!this.userLoggedIn) {
       this.clearAccessToken();
+      this.clearCurrentCompany();
       this.router.navigate(['/auth/login']);
     }
   }
@@ -84,6 +86,10 @@ export class AuthenticationService {
     const now = moment();
 
     return now.isAfter(expirationDate);
+  }
+
+  private clearCurrentCompany(): void {
+    localStorage.removeItem("current-company");
   }
 
   private clearAccessToken(): void {
@@ -103,6 +109,7 @@ export class AuthenticationService {
 
   public logout(): void {
     this.clearAccessToken();
-    this.router.navigate(["/home"])
+    this.clearCurrentCompany();
+    this.router.navigate(["/auth/login"])
   }
 }

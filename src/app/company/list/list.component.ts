@@ -5,6 +5,7 @@ import { CompanyService } from '../services/company.service';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
 import { GetUsersCompanyListBody } from '../types/company.type';
 import { AnimationOptions } from 'ngx-lottie';
+import { SelectDialogComponent } from '../select-dialog/select-dialog.component';
 
 @Component({
   selector: 'app-list',
@@ -28,15 +29,25 @@ export class ListComponent implements OnInit {
       } as const;
       
       this.companyService.getUsersCompanyList(currentUserPackageNo).subscribe(res => {
-        // if (!res.length) {
-        if (true) {
+        if (!res.length) {
           this.dialog.openFullScreenDialog(CreateDialogComponent, { 
             data: {
-              firstCompany: false
+              firstCompany: true
             } 
           }).afterClosed().subscribe(() => this.companySelected = true);
         }
+        else {
+          this.dialog.openFullScreenDialog(SelectDialogComponent, {
+            data: {
+              companies: res,
+              reSelect: false
+            }
+          }).afterClosed().subscribe(() => this.companySelected = true);
+        }
       })
+    }
+    else if (this.authDone && this.authentication.currentCompanySelected()) {
+      this.companySelected = true;
     }
   }
 }

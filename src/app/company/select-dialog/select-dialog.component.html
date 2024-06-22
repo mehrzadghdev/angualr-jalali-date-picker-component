@@ -1,0 +1,35 @@
+<div class="dialog fullscreen-dialog">
+    <div class="header">
+        <div *ngIf="data.reSelect" class="icon-button" (click)="closeDialog()">
+            <button class="icon-button">
+                <mat-icon class="icon-base">close</mat-icon>
+            </button>
+        </div>
+
+        <div class="header-title">
+            <p class="title">انتخاب شرکت فعال</p>
+        </div>
+    </div>
+
+    <div class="content">
+        <div class="select-company-dialog">
+            <div class="companies">
+                <div *ngFor="let company of data.companies" class="company-item">
+                    <div class="company-details">
+                        <h4>{{ company.companyName }}</h4>
+                        <p>{{ company.companyDesc }}</p>
+                    </div>
+                    <div class="company-select">
+                        <button mat-ripple class="stroked-button" (click)="onSelectCompany(company)">فعال کردن</button>
+                    </div>
+                </div>
+            </div>
+            <div class="add-company-button__wrapper">
+                <button class="text-button add-company-button" mat-ripple (click)="onAddCompanyDialog()">
+                    <mat-icon class="material-icons-outlined">add</mat-icon>
+                    ایجاد شرکت جدید
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

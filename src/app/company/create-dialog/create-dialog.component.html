@@ -1,13 +1,13 @@
 <div class="dialog new-company-dialog">
     <div class="header">
-        <div *ngIf="!data.firstCompany" class="icon-button" (click)="closeDialog()">
+        <div *ngIf="!data.firstCompany && !data.disableClose" class="icon-button" (click)="closeDialog()">
             <button class="icon-button">
                 <mat-icon class="icon-base">close</mat-icon>
             </button>
         </div>
 
         <div class="header-title">
-            <p *ngIf="!data.firstCompany" class="title">ساخت شرکت</p>
+            <p *ngIf="!data.firstCompany" class="title">ایجاد شرکت جدید</p>
             <p *ngIf="data.firstCompany" class="title">شروع کار با نرم افزار واسط کلید</p>
         </div>
     </div>
@@ -55,32 +55,32 @@
             </div>
             <div *ngSwitchCase="'information'" class="step-information">
                 <h2 class="add-company-field-title">مشخصات تماس</h2>
-                <mat-form-field class="add-company-field" appearance="outline">
+                <mat-form-field class="add-company-field" appearance="outline" hideRequiredMarker>
                     <mat-label>کد پستی</mat-label>
                     <input matInput formControlName="companyZipCode" type="number" maxlength="11" />
                     <mat-error *ngIf="addCompanyForm.get('companyZipCode')?.invalid && addCompanyForm.get('companyZipCode')?.invalid">
                         این فیلد الزامیست
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field class="add-company-field" appearance="outline">
+                <mat-form-field class="add-company-field" appearance="outline" hideRequiredMarker>
                     <mat-label>آدرس و مکان</mat-label>
                     <textarea matInput formControlName="companyAddress" rows="1"></textarea>
                     <mat-error *ngIf="addCompanyForm.get('companyAddress')?.invalid && addCompanyForm.get('companyAddress')?.invalid">
                         این فیلد الزامیست
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field class="add-company-field" appearance="outline">
+                <mat-form-field class="add-company-field" appearance="outline" hideRequiredMarker>
                     <mat-label>تلفن</mat-label>
                     <input matInput formControlName="companyTel" type="number" maxlength="11" />
                     <mat-error *ngIf="addCompanyForm.get('companyTel')?.invalid && addCompanyForm.get('companyTel')?.invalid">
                         این فیلد الزامیست
                     </mat-error>
                 </mat-form-field>
-                <mat-form-field class="add-company-field" appearance="outline">
+                <mat-form-field class="add-company-field" appearance="outline" hideRequiredMarker>
                     <mat-label>کد شعبه</mat-label>
-                    <input matInput formControlName="companyBranchNo" type="number" />
+                    <input matInput formControlName="companyBranchNo" type="text" />
                     <mat-error *ngIf="addCompanyForm.get('companyBranchNo')?.invalid && addCompanyForm.get('companyBranchNo')?.invalid">
-                        این فیلد الزامیست
+                        کد شعبه حداکثر چهار رقم میباشد
                     </mat-error>
                 </mat-form-field>
                 <div class="add-company-buttons-container">
@@ -99,12 +99,12 @@
                 </mat-form-field>
                 <mat-form-field class="add-company-field" appearance="outline">
                     <mat-label>کلید خصوصی</mat-label>
-                    <input matInput formControlName="privateKey" type="text" />
+                    <textarea matInput formControlName="privateKey" rows="1"></textarea>
                     <mat-error *ngIf="addCompanyForm.get('privateKey')?.invalid && addCompanyForm.get('privateKey')?.invalid">
                         این فیلد الزامیست
                     </mat-error>
                 </mat-form-field>
-                <mat-checkbox formControlName="companyStatus" [disabled]="true" class="example-margin">فعال بودن شرکت</mat-checkbox>                
+                <mat-checkbox formControlName="companyStatus" [disabled]="true" class="example-margin">فعال بودن شرکت</mat-checkbox>   
                 <div class="add-company-buttons-container">
                     <button type="button" mat-ripple class="stroked-button block-button" (click)="setStep('information')">بازگشت</button>
                     <button type="button" mat-ripple class="primary-button block-button" (click)="onAddCompany()">ایجاد شرکت</button>

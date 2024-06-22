@@ -1,0 +1,87 @@
+@import "../../../theme/variables.scss";
+@import "../../../theme/dialogs.scss";
+
+.dialog.fullscreen-dialog {
+    z-index: 999999;
+
+    .header {
+        margin-bottom: 0px;
+        border-bottom: none;
+    }
+
+    .content {
+        z-index: 2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        border-top: none;
+        border-bottom: none;
+        padding-top: 0;
+        height: calc(100% - 2 * ($headerFooterHeight / 2));
+        background-color: var(--background-color);
+
+        &::after {
+            background-image: url("../../../assets/images/background-pattern.jpg");
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            content: '';
+            display: block;
+            position: absolute;
+            inset: 0;
+            opacity: 0.05;
+            z-index: -1;
+        }
+    }
+
+    .footer {
+        display: none;
+    }
+}
+
+.select-company-dialog {
+    width: 360px;
+    background-color: var(--base-color);
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: var(--base-shadow);
+
+    .companies {
+        overflow-y: auto;
+        max-height: 60vh;
+    }
+
+    .company-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 10px 0;
+
+        .company-details {
+            h4 {
+                font-size: 14px;
+            }
+
+            p {
+                font-size: 12px;
+            }
+        }
+
+        button {
+            font-size: 12px;
+        }
+
+
+        &:not(:first-child) {
+            border-top: 2px solid var(--border-color-light);
+        }
+    }
+
+    .add-company-button__wrapper {
+        margin-top: 10px;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+    }
+}

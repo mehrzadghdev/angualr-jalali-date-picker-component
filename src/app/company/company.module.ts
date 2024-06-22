@@ -11,12 +11,14 @@ import { MatRippleModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatCheckboxModule } from '@angular/material/checkbox'
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { SelectDialogComponent } from './select-dialog/select-dialog.component'
 
 @NgModule({
   declarations: [
     ListComponent,
-    CreateDialogComponent
+    CreateDialogComponent,
+    SelectDialogComponent
   ],
   imports: [
     CommonModule,
