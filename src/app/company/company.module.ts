@@ -12,7 +12,9 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatTableModule } from '@angular/material/table';
 import { SelectDialogComponent } from './select-dialog/select-dialog.component'
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
@@ -29,7 +31,9 @@ import { SelectDialogComponent } from './select-dialog/select-dialog.component'
     MatInputModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatTableModule,
+    MatTooltipModule
   ]
 })
 export class CompanyModule { }

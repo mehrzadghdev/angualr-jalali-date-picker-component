@@ -4,6 +4,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { Theme } from '../../types/theme.type';
 import { DialogService } from '../../services/dialog.service';
 import { SelectDialogComponent } from 'src/app/company/select-dialog/select-dialog.component';
+import { CreateDialogComponent } from 'src/app/company/create-dialog/create-dialog.component';
 
 @Component({
   selector: 'app-panel',
@@ -67,6 +68,15 @@ export class PanelComponent {
     this.dialog.openFullScreenDialog(SelectDialogComponent, {
       data: {
         reSelect: true
+      }
+    })
+  }
+
+  public onAddCompany(): void {
+    this.dialog.openFullScreenDialog(CreateDialogComponent, {
+      data: {
+        firstCompany: false, 
+        disableClose: false
       }
     })
   }

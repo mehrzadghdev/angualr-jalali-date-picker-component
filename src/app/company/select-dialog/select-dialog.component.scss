@@ -58,6 +58,12 @@
         gap: 20px;
         padding: 10px 0;
 
+        .company-package-no {
+            max-width: 10px;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
         .company-details {
             h4 {
                 font-size: 14px;

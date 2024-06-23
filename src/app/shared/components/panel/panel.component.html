@@ -25,12 +25,14 @@
                 </div>
             </div>
             <ul class="accordion-content" (click)="$event.stopPropagation()">
-                <li matRipple class="unselectable">ایجاد شرکت جدید</li>
+                <li matRipple class="unselectable" (click)="onAddCompany()">ایجاد شرکت جدید</li>
+                <li matRipple class="unselectable" (click)="onReSelectCompany()">تغییر شرکت فعال</li>
                 <li matRipple class="unselectable">لیست تمام شرکت ها</li>
             </ul>
         </li>
         <mat-menu #companyMenu="matMenu" xPosition="before">
-            <button mat-menu-item>ایجاد شرکت جدید</button>
+            <button mat-menu-item (click)="onAddCompany()">ایجاد شرکت جدید</button>
+            <button mat-menu-item (click)="onReSelectCompany()">تغییر شرکت فعال</button>
             <button mat-menu-item>لیست تمام شرکت ها</button>
         </mat-menu>
 
@@ -181,12 +183,6 @@
                 <div class="logout-button">
                     <mat-icon>logout</mat-icon>
                     خروج از حساب کاربری
-                </div>
-            </button>
-            <button (click)="onReSelectCompany()" mat-menu-item>
-                <div class="logout-button">
-                    <mat-icon class="material-icons-outlined">apartment_outline</mat-icon>
-                    تغییر شرکت فعال
                 </div>
             </button>
         </mat-menu>

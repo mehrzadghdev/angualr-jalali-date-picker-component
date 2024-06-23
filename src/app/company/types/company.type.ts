@@ -2,16 +2,16 @@
 
 export interface Company {
     id: number,
-    packageNo: number,
+    packageNo: number, //////////
     databaseId: number,
-    companyName: string,
-    companyIdentity: number,
-    taxIdentity: string,
-    privateKey: string,
+    companyName: string, /////////////
+    companyIdentity: number, //
+    taxIdentity: string,  //
+    privateKey: string, //
     companyZipCode: string,
     companyAddress: string,
     companyTel: string,
-    companyBranchNo: string,
+    companyBranchNo: string, ////////
     companyStatus: boolean,
     companyDesc: string,
     userId: string

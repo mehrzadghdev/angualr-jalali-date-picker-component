@@ -3,9 +3,10 @@ import { DialogService } from 'src/app/shared/services/dialog.service';
 import { CreateDialogComponent } from '../create-dialog/create-dialog.component';
 import { CompanyService } from '../services/company.service';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
-import { GetUsersCompanyListBody } from '../types/company.type';
+import { Company, GetCompanyList, GetUsersCompanyListBody } from '../types/company.type';
 import { AnimationOptions } from 'ngx-lottie';
 import { SelectDialogComponent } from '../select-dialog/select-dialog.component';
+import { UserDetails } from 'src/app/shared/types/authentication.type';
 
 @Component({
   selector: 'app-list',
@@ -17,17 +18,25 @@ export class ListComponent implements OnInit {
     return this.authentication.userLoggedIn;
   }
   public companySelected: boolean = false;
+  public companiesList: Company[] = [];
+  public companiesListLoaded: boolean = false;
+  public tableColumns: string[] = ["packageNo", "name", "branchNo", "tel", "status", "desc", "action"]
 
   constructor(private dialog: DialogService, private companyService: CompanyService, private authentication: AuthenticationService) {
     this.authentication.authorize();
   }
 
   ngOnInit(): void {
-    if (this.authDone && !this.authentication.currentCompanySelected()) {
-      const currentUserPackageNo: GetUsersCompanyListBody = {
-        packageNo: 3001012
-      } as const;
-      
+    const currentUserPackageNo: GetUsersCompanyListBody = {
+      packageNo: (this.authentication.userDetails as UserDetails).packageNo
+    } as const;
+
+    this.companyService.getUsersCompanyList(currentUserPackageNo).subscribe(res => {
+      this.companiesList = res;
+      this.companiesListLoaded = true;
+    })
+
+    if (this.authDone && !this.authentication.currentCompanySelected() && this.authentication.userDetails) {
       this.companyService.getUsersCompanyList(currentUserPackageNo).subscribe(res => {
         if (!res.length) {
           this.dialog.openFullScreenDialog(CreateDialogComponent, { 
@@ -49,5 +58,11 @@ export class ListComponent implements OnInit {
     else if (this.authDone && this.authentication.currentCompanySelected()) {
       this.companySelected = true;
     }
+  }
+
+  public onDeleteCompany(idToDelete: number): void {
+    this.companyService.deleteCompany({ databaseId: idToDelete }).subscribe(res => {
+      this.companiesList = this.companiesList.filter(company => company.databaseId !== idToDelete);
+    })
   }
 }

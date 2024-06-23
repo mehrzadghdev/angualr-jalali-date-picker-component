@@ -49,9 +49,9 @@ export class CreateDialogComponent {
   }
 
   public onAddCompany(): void {
-    if (!this.addCompanyForm.invalid) {
+    if (!this.addCompanyForm.invalid && this.authentication.userDetails) {
       const addCompanyBody: AddCompanyBody = {
-        packageNo: 3001012,
+        packageNo: this.authentication.userDetails.packageNo,
         companyName: (this.addCompanyForm.controls["companyName"].value) + "",
         taxIdentity: (this.addCompanyForm.controls["taxIdentity"].value) + "",
         privateKey: (this.addCompanyForm.controls["privateKey"].value) + "",

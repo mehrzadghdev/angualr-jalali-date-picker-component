@@ -39,8 +39,11 @@ export class LoginComponent {
         next: (result) => {
           this.authentication.accessToken = result.accessToken;
           this.authentication.tokenExpireDate = result.expiresIn;
-          this.loginLoading = false;
-          this.router.navigate(['/software']);
+          this.authentication.userInfo().subscribe(result => {
+            this.authentication.userDetails = result;
+            this.router.navigate(['/software']);
+            this.loginLoading = false;
+          })
         },
         error: () => {
           this.loginLoading = false;

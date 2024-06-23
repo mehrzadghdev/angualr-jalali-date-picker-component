@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, catchError, of } from 'rxjs';
-import { LoginApiBody, LoginApiResult, RegisterApiBody } from '../types/authentication.type';
-import { HttpClient } from '@angular/common/http';
+import { LoginApiBody, LoginApiResult, RegisterApiBody, UserDetails } from '../types/authentication.type';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environment/environment';
 import * as moment from 'jalali-moment';
 import { Router } from '@angular/router';
@@ -12,6 +12,7 @@ import { Company } from '../../company/types/company.type';
 })
 export class AuthenticationService {
   private _company = localStorage.getItem("current-company");
+  private _userDetails = localStorage.getItem("user-details");
   private _accessToken: string | null = null;
   private _tokenExpireDate: string | null = null;
   
@@ -20,11 +21,23 @@ export class AuthenticationService {
       return JSON.parse(this._company);
     }
 
-    return '';
+    return "";
   }
 
   set currentCompany(item: Company) {
     localStorage.setItem("current-company", JSON.stringify(item));
+  }
+
+  get userDetails(): UserDetails | "" {
+    if (this._userDetails !== null) {
+      return JSON.parse(this._userDetails);
+    }
+
+    return "";
+  }
+
+  set userDetails(item: UserDetails) {
+    localStorage.setItem("user-details", JSON.stringify(item));
   }
 
   public get userLoggedIn(): boolean {
@@ -66,7 +79,7 @@ export class AuthenticationService {
   constructor(private http: HttpClient, private router: Router) { }
 
   public currentCompanySelected(): boolean {
-    if (this._company && this._company !== null) {
+    if (this._company && this._company !== null && this._company !== "") {
       return true
     }
 
@@ -95,6 +108,7 @@ export class AuthenticationService {
   private clearAccessToken(): void {
     localStorage.removeItem("auth-token");
     localStorage.removeItem("token-expire");
+    localStorage.getItem("user-details");
     this._accessToken = null;
     this._tokenExpireDate = null
   }
@@ -105,6 +119,12 @@ export class AuthenticationService {
 
   public login(loginDetails: LoginApiBody): Observable<LoginApiResult> {
     return this.http.post<LoginApiResult>(environment.apiUrl + "login", loginDetails);
+  }
+
+  public userInfo(): Observable<UserDetails> {
+    const headers: HttpHeaders = new HttpHeaders().set("Authorization", "Bearer "+this.accessToken);
+
+    return this.http.get<UserDetails>(environment.apiUrl + 'userInfo', { headers: headers })
   }
 
   public logout(): void {

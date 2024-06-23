@@ -55,3 +55,34 @@ export interface RegisterApiResult {
   lockoutEnabled: boolean,
   accessFailedCount: number
 }
+
+export interface UserDetails {
+  id: string,
+  userName: string,
+  normalizedUserName: string,
+  email: string,
+  normalizedEmail: string,
+  emailConfirmed: boolean,
+  passwordHash: string,
+  securityStamp: string,
+  concurrencyStamp: string,
+  phoneNumberConfirmed: boolean,
+  twoFactorEnabled: boolean,
+  lockoutEnd: string,
+  lockoutEnabled: boolean,
+  accessFailedCount: number,
+  packageNo: number,
+  name: string,
+  family: string,
+  phoneNumber: string,
+  salePatternCount: number,
+  currencyPatternCount: number,
+  goldPatternCount: number,
+  projectPatternCount: number,
+  servicePatternCount: number,
+  airTicketPatternCount: number,
+  exportPatternCount: number,
+  createdDate: string,
+  modifiedDate: string,
+  companies: null;
+}

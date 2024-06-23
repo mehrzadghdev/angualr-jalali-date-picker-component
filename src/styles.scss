@@ -339,22 +339,22 @@ mat-nav-list.mobile-buttons-nav-list {
 
 .material-icons-outlined,
 .material-icons.material-icons--outlined {
-  font-family: 'Material Icons Outlined' !important;
+    font-family: 'Material Icons Outlined' !important;
 }
 
 .material-icons-two-tone,
 .material-icons.material-icons--two-tone {
-  font-family: 'Material Icons Two Tone' !important;
+    font-family: 'Material Icons Two Tone' !important;
 }
 
 .material-icons-round,
 .material-icons.material-icons--round {
-  font-family: 'Material Icons Round' !important;
+    font-family: 'Material Icons Round' !important;
 }
 
 .material-icons-sharp,
 .material-icons.material-icons--sharp {
-  font-family: 'Material Icons Sharp' !important;
+    font-family: 'Material Icons Sharp' !important;
 }
 
 .pointer {
@@ -363,4 +363,20 @@ mat-nav-list.mobile-buttons-nav-list {
 
 .error-color {
     color: var(--error-color);
+}
+
+.skeleton {
+    background: linear-gradient(90deg, var(--background-color), var(--background-color-light), var(--background-color));
+    animation: leftToRight 1.5s infinite reverse;
+    background-size: 200%;
+
+    @keyframes leftToRight {
+        0% {
+            background-position: -100% 0;
+        }
+
+        100% {
+            background-position: 100% 0;
+        }
+    }
 }

@@ -12,8 +12,9 @@ import { CompanyService } from '../services/company.service';
   styleUrls: ['./select-dialog.component.scss']
 })
 export class SelectDialogComponent implements OnInit {
-  private companiesList: Company[] = [];
-
+  public companiesList: Company[] = [];
+  public getCompaniesLoaded: boolean = false;
+  
   constructor(
     private dialogRef: MatDialogRef<SelectDialogComponent>,
     private authentication: AuthenticationService,
@@ -23,8 +24,14 @@ export class SelectDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (this.data.reSelect) {
-    
+    if (this.data.reSelect && this.authentication.userDetails) {
+      this.companyService.getUsersCompanyList({ packageNo: this.authentication.userDetails.packageNo }).subscribe(companies => {
+        this.companiesList = companies;
+        this.getCompaniesLoaded = true;
+      })
+    }
+    else {
+      this.companiesList = this.data.companies;
     }
   }
 
