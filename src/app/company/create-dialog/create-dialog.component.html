@@ -59,7 +59,7 @@
                     <mat-label>کد پستی</mat-label>
                     <input matInput formControlName="companyZipCode" type="number" maxlength="11" />
                     <mat-error *ngIf="addCompanyForm.get('companyZipCode')?.invalid && addCompanyForm.get('companyZipCode')?.invalid">
-                        این فیلد الزامیست
+                        کد پستی نامعتبر است  
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="add-company-field" appearance="outline" hideRequiredMarker>
@@ -73,7 +73,7 @@
                     <mat-label>تلفن</mat-label>
                     <input matInput formControlName="companyTel" type="number" maxlength="11" />
                     <mat-error *ngIf="addCompanyForm.get('companyTel')?.invalid && addCompanyForm.get('companyTel')?.invalid">
-                        این فیلد الزامیست
+                        تلفن نامعتبر است
                     </mat-error>
                 </mat-form-field>
                 <mat-form-field class="add-company-field" appearance="outline" hideRequiredMarker>
@@ -107,7 +107,7 @@
                 <mat-checkbox formControlName="companyStatus" [disabled]="true" class="example-margin">فعال بودن شرکت</mat-checkbox>   
                 <div class="add-company-buttons-container">
                     <button type="button" mat-ripple class="stroked-button block-button" (click)="setStep('information')">بازگشت</button>
-                    <button type="button" mat-ripple class="primary-button block-button" (click)="onAddCompany()">ایجاد شرکت</button>
+                    <button type="button" [ngClass]="{'button-loading': addCompanyLoading}" mat-ripple class="primary-button block-button" (click)="onAddCompany()">ایجاد شرکت</button>
                 </div>
             </div>
         </form>

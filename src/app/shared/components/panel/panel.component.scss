@@ -1,5 +1,14 @@
+@keyframes accordion-aniamtion {
+    0% {
+        max-height: 0px;
+    }
+    100% {
+        max-height: 100px;
+    }
+}
+
 .panel-sidebar {
-    position: absolute;
+    position: fixed;
     overflow-y: auto;
     overflow-x: hidden;
     top: 0;
@@ -8,7 +17,7 @@
     width: 60px;
     color: #ffffff;
     transition: width .5s ease;
-    background-color: #2B2E3B;
+    background-color: var(--sidebar-background);
     z-index: 1000;
 
     &.active {
@@ -61,7 +70,7 @@
                     }
 
                     .accordion-header {
-                        background-color: #252B36;
+                        background-color: var(--sidebar-active-accordion);
                     }
 
                     .nav-item__icon {
@@ -104,15 +113,26 @@
 
             .accordion-content {
                 display: none;
+                overflow: hidden;
+                animation: accordion-aniamtion .4s;
 
                 li {
                     padding: 6px 49px 6px 24px;
+                    transition: all .3s ease;
                     color: #A4B0BE;
                     font-size: 13px;
-                    transition: all .3s ease;
                     cursor: pointer;
                     overflow: hidden;
                     white-space: nowrap;
+                    
+                    & a {
+                        color: #A4B0BE;
+                        font-size: 13px;
+
+                        &:hover {
+                            color: #fff;
+                        }
+                    }
 
                     &:hover {
                         color: #fff;
@@ -126,7 +146,7 @@
                 }
 
                 .accordion-header {
-                    background-color: #252B36;
+                    background-color: var(--sidebar-active-accordion);
                 }
 
                 .nav-item__title {
@@ -190,6 +210,9 @@
         box-shadow: 0 -3px 31px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.02);
 
         .panel-sidebar_logo {
+            cursor: pointer;
+            padding: 3px;
+            border-radius: 10px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -200,7 +223,7 @@
             }
 
             .person-icon {
-                background-color: #2C313D;
+                background-color: var(--sidebar-active-accordion);
                 min-width: 36px;
                 min-height: 36px;
                 display: flex;
@@ -210,6 +233,7 @@
             }
 
             span {
+                user-select: none;
                 font-size: 16px;
                 font-weight: 600;
                 overflow: hidden;

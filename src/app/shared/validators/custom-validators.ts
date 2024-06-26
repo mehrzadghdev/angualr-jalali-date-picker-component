@@ -1,4 +1,4 @@
-import { FormGroup } from "@angular/forms";
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn } from "@angular/forms";
 
 export abstract class CustomValidators {
     public static confirmPassword(password: string, confirmPassword: string) {
@@ -21,5 +21,57 @@ export abstract class CustomValidators {
                 confirmPasswordControl.setErrors(null);
             }
         }
+    }
+
+    public static nationalId(formControl: AbstractControl): ValidationErrors | null {
+        const value = formControl.value as number;
+
+        if (!value) return null;
+
+        if (!value.toString().length) return null;
+        
+        return value.toString().length !== 10 ? { nationalId: true } : null;
+    }
+
+    public static zipCode(formControl: AbstractControl): ValidationErrors | null {
+        const value = formControl.value as number;
+
+        if (!value) return null;
+
+        if (!value.toString().length) return null;
+        
+        return value.toString().length !== 10 ? { zipCode: true } : null;
+    }
+
+    public static phoneNumber(formControl: AbstractControl): ValidationErrors | null {
+        const value = formControl.value as number;
+
+        if (!value) return null;
+
+        if (!value.toString().length) return null;
+
+        if (value.toString().startsWith("09")) return null;
+        
+        return value.toString().length !== 10 ? { phoneNumber: true } : null;
+    }
+
+    public static economicCode(formControl: AbstractControl): ValidationErrors | null {
+        const value = formControl.value as number;
+
+        if (!value) return null;
+
+        if (!value.toString().length) return null;
+        
+        return value.toString().length !== 12 ? { economicCode: true } : null;
+    }
+
+    public static branchNo(formControl: AbstractControl): ValidationErrors | null {
+        const value = formControl.value as number;
+
+        if (!value) return null;
+
+        if (!value.toString().length) return null;
+        
+        return value.toString().length > 4 ? { economicCode: true } : null;
     }
 }

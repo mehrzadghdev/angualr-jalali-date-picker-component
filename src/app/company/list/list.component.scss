@@ -1,4 +1,9 @@
 .content-topbar {
+    gap: 20px;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+
     h2 {
         font-size: 18px;
         font-weight: 400;
@@ -20,10 +25,18 @@
     }
 }
 
+@media only screen and (max-width: 768px) {
+    .content-topbar {
+        flex-direction: column;
+        align-items: start;
+    }
+}
+
 .content-table {
-    margin-top: 20px;
+    margin-top: 17px;
     box-shadow: 0 -3px 31px 0 rgba(0, 0, 0, 0.05), 0 6px 20px 0 rgba(0, 0, 0, 0.02);
     overflow-x: auto;
+    background-color: var(--base-color);
 
     table {
         min-width: 500px;

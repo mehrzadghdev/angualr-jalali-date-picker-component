@@ -1,5 +1,7 @@
 // Person Base
 
+import { PersonType } from "../enums/person-type.enum";
+
 export interface Person {
     id: number,
     databaseId: number,
@@ -20,7 +22,23 @@ export type GetPersonList = Person[];
 
 // Person/GetCompaniesPersonList
 
-export type GetCompaniesPersonList = Person[];
+export type GetCompaniesPersonList = GetCompaniesPersonListItem[];
+
+export interface GetCompaniesPersonListItem {
+    id: number,
+    databaseId: number,
+    code: number,
+    personType: PersonType,
+    personName: string,
+    nationalId: string,
+    economicCode: string,
+    tel: string,
+    mobile: string,
+    zipCode: string,
+    address: string,
+    createdDate: string,
+    modifiedDate: string
+}
 
 export interface GetCompaniesPersonListBody {
     databaseId: number
@@ -54,7 +72,7 @@ export interface AddPerson {
 
 export interface AddPersonBody {
     databaseId: number,
-    code: number,
+    code?: number,
     personType: number,
     personName: string,
     nationalId: string,

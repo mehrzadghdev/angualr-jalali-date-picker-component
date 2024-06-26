@@ -1,27 +1,64 @@
-<app-panel>
+<key-panel module="person" (moduleDataUpdated)="onDataUpdated($event)">
     <div class="content-topbar">
         <div>
-            <h2>لیست تمام شرکت ها</h2>
+            <h2>لیست تمام طرف حساب ها</h2>
             <span>
-                شرکت
-                <mat-icon class="icon-light">arrow_back_ios</mat-icon>
-                لیست تمام شرکت ها
+                طرف حساب
+                <mat-icon class="icon-primary">arrow_back_ios</mat-icon>
+                لیست تمام طرف حساب ها
             </span>
+        </div>
+        <div>
+            <button (click)="onAddPerson()" mat-ripple class="raised-button">ایجاد طرف حساب جدید</button>
         </div>
     </div>
     <div class="content-table">
         <div class="table">
-            <!-- <table mat-table [dataSource]="personsList" class="">
-                <ng-container matColumnDef="packageNo">
-                    <th mat-header-cell *matHeaderCellDef> شماره بسته </th>
-                    <td mat-cell *matCellDef="let element"> {{element.packageNo}} </td>
+            <table *ngIf="personListLoaded" mat-table [dataSource]="personsList" class="">
+                <ng-container matColumnDef="نوع">
+                    <th mat-header-cell *matHeaderCellDef> نوع </th>
+                    <td mat-cell *matCellDef="let element"> {{ personTypeTextByNumber(element.personType) }} </td>
                 </ng-container>
 
-                <ng-container matColumnDef="action">
+                <ng-container matColumnDef="نام">
+                    <th mat-header-cell *matHeaderCellDef> نام </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.personName }} </td>
+                </ng-container>
+                
+                <ng-container matColumnDef="کد ملی یا شماره اقتصادی">
+                    <th mat-header-cell *matHeaderCellDef> کد ملی یا شماره اقتصادی </th>
+                    <td mat-cell *matCellDef="let element">
+                        <ng-container *ngIf="element.personType === 0">{{ element.nationalId }}</ng-container>
+                        <ng-container *ngIf="element.personType !== 0">{{ element.economicCode }}</ng-container>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="تاریخ ساخت">
+                    <th mat-header-cell *matHeaderCellDef> تاریخ ساخت </th>
+                    <td mat-cell *matCellDef="let element"> {{ element.createdDate | jdate }} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="تلفن">
+                    <th mat-header-cell *matHeaderCellDef> تلفن </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        <ng-container *ngIf="element.tel && element.tel !== 'null'"> {{ element.tel }} </ng-container>
+                        <ng-container *ngIf="!element.tel || element.tel === 'null'"> بدون تلفن </ng-container>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="کد پستی">
+                    <th mat-header-cell *matHeaderCellDef> کد پستی </th>
+                    <td mat-cell *matCellDef="let element"> 
+                        <ng-container *ngIf="element.zipCode && element.zipCode !== 'null'"> {{ element.zipCode }} </ng-container>
+                        <ng-container *ngIf="!element.zipCode || element.zipCode === 'null'"> بدون کد پستی </ng-container>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="عملیات">
                     <th mat-header-cell *matHeaderCellDef> عملیات </th>
                     <td mat-cell *matCellDef="let element">
                         <div class="table-action-buttons">
-                            <button matTooltip="حذف طرف حساب" (click)="onDeletePerson(element.databaseId)" mat-ripple
+                            <button matTooltip="حذف طرف حساب" (click)="onDeletePerson(element.code)" mat-ripple
                                 class="icon-button">
                                 <mat-icon class="icon-red material-icons-outlined">delete</mat-icon>
                             </button>
@@ -34,7 +71,8 @@
 
                 <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
-            </table> -->
+            </table>
+            <key-table-loading *ngIf="!personListLoaded" [columns]="tableColumns"></key-table-loading>
         </div>
     </div>
-</app-panel>
+</key-panel>

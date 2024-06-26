@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { CompanyService } from '../services/company.service';
 import { AddCompanyBody } from '../types/company.type';
 import { AuthenticationService } from 'src/app/shared/services/authentication.service';
+import { CustomValidators } from 'src/app/shared/validators/custom-validators';
 
 @Component({
   selector: 'app-create-dialog',
@@ -12,7 +13,8 @@ import { AuthenticationService } from 'src/app/shared/services/authentication.se
 })
 export class CreateDialogComponent {
   public addCompanyForm: FormGroup;
-  public addCompanyStep: 'welcome' | 'base' | 'information' | 'tax' = 'welcome'
+  public addCompanyStep: 'welcome' | 'base' | 'information' | 'tax' = 'welcome';
+  public addCompanyLoading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -25,10 +27,10 @@ export class CreateDialogComponent {
       companyName: ['', Validators.required],
       taxIdentity: ['', Validators.required],
       privateKey: ['', Validators.required],
-      companyZipCode: [''],
+      companyZipCode: ['', CustomValidators.zipCode],
       companyAddress: [''],
-      companyTel: [''],
-      companyBranchNo: ['', Validators.maxLength(4)],
+      companyTel: ['', CustomValidators.phoneNumber],
+      companyBranchNo: ['', CustomValidators.branchNo],
       companyStatus: [data.firstCompany ? true : false, Validators.required],
       companyDesc: ['', Validators.required]
     })
@@ -49,7 +51,10 @@ export class CreateDialogComponent {
   }
 
   public onAddCompany(): void {
+    this.addCompanyLoading = true;
+    
     if (!this.addCompanyForm.invalid && this.authentication.userDetails) {
+
       const addCompanyBody: AddCompanyBody = {
         packageNo: this.authentication.userDetails.packageNo,
         companyName: (this.addCompanyForm.controls["companyName"].value) + "",
@@ -65,6 +70,7 @@ export class CreateDialogComponent {
       
       this.companyService.addCompany(addCompanyBody).subscribe(res => {
         this.authentication.currentCompany = res;
+        this.addCompanyLoading = false;
         this.dialogRef.close();
       })
     }

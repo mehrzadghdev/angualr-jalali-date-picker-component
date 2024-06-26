@@ -7,6 +7,7 @@ import { Company, GetCompanyList, GetUsersCompanyListBody } from '../types/compa
 import { AnimationOptions } from 'ngx-lottie';
 import { SelectDialogComponent } from '../select-dialog/select-dialog.component';
 import { UserDetails } from 'src/app/shared/types/authentication.type';
+import { KeyModules } from 'src/app/shared/types/modules.type';
 
 @Component({
   selector: 'app-list',
@@ -20,7 +21,7 @@ export class ListComponent implements OnInit {
   public companySelected: boolean = false;
   public companiesList: Company[] = [];
   public companiesListLoaded: boolean = false;
-  public tableColumns: string[] = ["packageNo", "name", "branchNo", "tel", "status", "desc", "action"]
+  public tableColumns: string[] = ["شماره بسته", "نام شرکت", "کد شعبه", "تلفن", "وضعیت", "توضیحات شرکت", "عملیات"]
 
   constructor(private dialog: DialogService, private companyService: CompanyService, private authentication: AuthenticationService) {
     this.authentication.authorize();
@@ -60,9 +61,39 @@ export class ListComponent implements OnInit {
     }
   }
 
+  public onDataUpdated(data: KeyModules): void {
+    if (data === 'company') {
+      this.reloadCompanyList()
+    }
+  }
+
+  private reloadCompanyList(): void {
+    this.companiesListLoaded = false;
+  
+    const currentUserPackageNo: GetUsersCompanyListBody = {
+      packageNo: (this.authentication.userDetails as UserDetails).packageNo
+    } as const;
+
+    this.companyService.getUsersCompanyList(currentUserPackageNo).subscribe(res => {
+      this.companiesList = res;
+      this.companiesListLoaded = true;
+    })
+  }
+
   public onDeleteCompany(idToDelete: number): void {
     this.companyService.deleteCompany({ databaseId: idToDelete }).subscribe(res => {
-      this.companiesList = this.companiesList.filter(company => company.databaseId !== idToDelete);
+      this.reloadCompanyList()
+    })
+  }
+
+  public onAddCompany(): void {
+    this.dialog.openFullScreenDialog(CreateDialogComponent, {
+      data: {
+        firstCompany: false, 
+        disableClose: false
+      }
+    }).afterClosed().subscribe(res => {
+      this.reloadCompanyList()
     })
   }
 }

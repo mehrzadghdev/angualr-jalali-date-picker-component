@@ -808,3 +808,7 @@ input::placeholder {
 .block-field {
     width: 100%;
 }
+
+.mat-mdc-option.mdc-list-item--selected:not(.mdc-list-item--disabled) .mdc-list-item__primary-text {
+    color: var(--primary-color) !important;
+}

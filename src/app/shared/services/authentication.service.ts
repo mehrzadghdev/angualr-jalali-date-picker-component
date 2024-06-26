@@ -114,10 +114,12 @@ export class AuthenticationService {
   }
 
   public register(registerDetails: RegisterApiBody) {
+    this.clearCurrentCompany();
     return this.http.post(environment.apiUrl + "Users/AddUser", registerDetails)
   }
 
   public login(loginDetails: LoginApiBody): Observable<LoginApiResult> {
+    this.clearCurrentCompany();
     return this.http.post<LoginApiResult>(environment.apiUrl + "login", loginDetails);
   }
 
