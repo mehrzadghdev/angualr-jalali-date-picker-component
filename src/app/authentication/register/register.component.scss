@@ -37,6 +37,8 @@
 
             a {
                 text-decoration: underline;
+                color: var(--primary-color);
+                font-size: 14px;
             }
         }
 
@@ -94,6 +96,8 @@
             margin-top: 15px;
             margin-inline-start: 5px;
             text-decoration: underline;
+            color: var(--primary-color);
+            font-size: 14px;
         }
     }
 }
