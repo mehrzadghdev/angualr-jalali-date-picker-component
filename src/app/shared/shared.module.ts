@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { SharedRoutingModule } from './shared-routing.module';
-import { PanelComponent } from './components/panel/panel.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
@@ -32,7 +31,6 @@ export function playerFactory() {
 
 @NgModule({
   declarations: [
-    PanelComponent,
     LoadingComponent,
     JdatePipe,
     TableLoadingComponent,
@@ -67,7 +65,6 @@ export function playerFactory() {
     DialogService
   ],
   exports: [
-    PanelComponent,
     LoadingComponent,
     JdatePipe,
     TableLoadingComponent,

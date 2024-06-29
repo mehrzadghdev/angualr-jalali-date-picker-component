@@ -16,6 +16,7 @@ export class RequestService {
       catchError((err) => {
         if ([401, 403].includes(err.status)) {
           this.authentication.logout();
+          this.authentication.authorize();
         }
         const error = err.error?.message || err.statusText;
         console.error(err);

@@ -5,7 +5,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environment/environment';
 import * as moment from 'jalali-moment';
 import { Router } from '@angular/router';
-import { Company } from '../../company/types/company.type';
+import { Company } from 'src/app/software/types/company.type';
 
 @Injectable({
   providedIn: 'root'
@@ -108,7 +108,7 @@ export class AuthenticationService {
   private clearAccessToken(): void {
     localStorage.removeItem("auth-token");
     localStorage.removeItem("token-expire");
-    localStorage.getItem("user-details");
+    localStorage.removeItem("user-details");
     this._accessToken = null;
     this._tokenExpireDate = null
   }

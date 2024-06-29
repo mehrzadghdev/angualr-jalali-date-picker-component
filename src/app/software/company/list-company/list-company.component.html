@@ -1,0 +1,74 @@
+<div class="content-topbar">
+    <div>
+        <h2>لیست تمام شرکت ها</h2>
+        <span>
+            شرکت
+            <mat-icon class="icon-primary">arrow_back_ios</mat-icon>
+            لیست تمام شرکت ها
+        </span>
+    </div>
+    <div>
+        <button (click)="onAddCompany()" mat-ripple class="raised-button">ایجاد ایجاد جدید</button>
+    </div>
+</div>
+<div class="content-table">
+    <div class="table">
+        <table *ngIf="companiesListLoaded" mat-table [dataSource]="companiesList" class="">
+            <ng-container matColumnDef="شماره بسته">
+                <th mat-header-cell *matHeaderCellDef> شماره بسته </th>
+                <td mat-cell *matCellDef="let element"> {{element.packageNo}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="نام شرکت">
+                <th mat-header-cell *matHeaderCellDef> نام شرکت </th>
+                <td mat-cell *matCellDef="let element"> {{element.companyName}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="کد شعبه">
+                <th mat-header-cell *matHeaderCellDef> کد شعبه </th>
+                <td mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="element.companyBranchNo">{{element.companyBranchNo}}</ng-container>
+                    <ng-container *ngIf="!element.companyBranchNo" class="error-color">بدون کد شعبه</ng-container>
+                </td>
+            </ng-container>
+            <ng-container matColumnDef="تلفن">
+                <th mat-header-cell *matHeaderCellDef> تلفن </th>
+                <td mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="element.companyTel">{{element.companyTel}}</ng-container>
+                    <ng-container *ngIf="!element.companyTel" class="error-color">بدون تلفن </ng-container>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="وضعیت">
+                <th mat-header-cell *matHeaderCellDef> وضعیت </th>
+                <td mat-cell *matCellDef="let element">
+                    <ng-container *ngIf="element.companyStatus">فعال</ng-container>
+                    <ng-container *ngIf="!element.companyStatus">غیر فعال</ng-container>
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="توضیحات شرکت">
+                <th mat-header-cell *matHeaderCellDef> توضیحات شرکت </th>
+                <td mat-cell *matCellDef="let element"> {{element.companyDesc}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="عملیات">
+                <th mat-header-cell *matHeaderCellDef> عملیات </th>
+                <td mat-cell *matCellDef="let element">
+                    <div class="table-action-buttons">
+                        <button matTooltip="حذف شرکت" (click)="onDeleteCompany(element.databaseId)" mat-ripple
+                            class="icon-button"><mat-icon
+                                class="icon-red material-icons-outlined">delete</mat-icon></button>
+                        <button matTooltip="ویرایش" mat-ripple class="icon-button"><mat-icon
+                                class="icon-light material-icons-outlined">edit_square</mat-icon></button>
+                    </div>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
+        </table>
+        <key-table-loading *ngIf="!companiesListLoaded" [columns]="tableColumns" [rows]="30"></key-table-loading>
+    </div>
+</div>
