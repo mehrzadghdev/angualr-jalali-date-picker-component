@@ -3,6 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { SoftwareComponent } from './software.component';
 
 const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'company',
+    pathMatch: 'full'
+  },
   { 
     path: '',
     component: SoftwareComponent,
