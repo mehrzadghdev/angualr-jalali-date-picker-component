@@ -70,7 +70,7 @@
                 <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: tableColumns;"></tr>
             </table>
-            <key-table-loading *ngIf="!companiesListLoaded" [columns]="tableColumns" [rows]="30"></key-table-loading>
+            <key-table-loading *ngIf="!companiesListLoaded" [columns]="tableColumns" [rows]="10"></key-table-loading>
         </div>
     </div>
 </key-panel>
