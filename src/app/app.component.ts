@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from './shared/services/authentication.service';
-import { ThemeService } from './shared/services/theme.service';
-import { RequestService } from './shared/services/request.service';
+import { KeyDate } from './date-picker/key-date';
 
 @Component({
   selector: 'app-root',
@@ -9,13 +7,14 @@ import { RequestService } from './shared/services/request.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  constructor (
-    private authentication: AuthenticationService,
-    private themeService: ThemeService,
-    private request: RequestService,
-  ) { }
+  public selectedDate: string = KeyDate.toString(new Date());
+
+  constructor(
+  ) {
+  }
 
   ngOnInit(): void {
-    this.themeService.initTheme();
   }
+
+
 }

@@ -1,0 +1,85 @@
+.date-picker {
+    &__form-field {
+        width: 100%;
+    }
+
+    &__menu {
+        margin: 0 auto;
+    }
+    
+    &__header {
+        display: flex;
+        justify-content: space-between;
+        background-color: #008A77;
+        padding: 5px 20px;
+        
+        span {
+            font-size: 16px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            color: #dee2e2;
+        }
+    }
+    
+    &__date-title {
+        color: #f1f2f6 !important;
+        font-size: 16px;
+        font-weight: 700;
+    }
+    
+    &__actions {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    &__main {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        gap: 3px;
+        padding: 20px 20px 20px 20px;
+    }
+
+    &__weekday-item {
+        font-size: 14px;
+        font-weight: 600;
+        text-align: center;
+    }
+
+    &__day-item {
+        padding: 10px;
+        aspect-ratio: 1 / 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        border-radius: 50%;
+        color: #2f3542;
+        transition: all .1s ease;
+        cursor: pointer;
+        border: 1px solid transparent;
+
+        &.today {
+            background-color: #008A77;
+            color: #ffffff;
+
+            &:hover {
+                background-color: #E5F3F1;
+                border: 1px solid #008A77;
+                color: #008A77;
+            }
+        }
+
+        &.active {
+            border: 1px solid #008A77;
+            background-color: #E5F3F1;
+        }
+
+        &:hover {
+            border: 1px solid #008A77;
+            // color: #008A77;
+            background-color: #E5F3F1;
+        }   
+    }
+}

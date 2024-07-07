@@ -1,0 +1,116 @@
+// Numbers Or Meters
+
+// 400
+ // 20px
+ // 1.5
+
+// $primary: (
+//     900: royalblue,
+//     800: lighten(royalblue, 5%),
+//     700: lighten(royalblue, 10%),
+//     600: lighten(royalblue, 15%),
+//     500: lighten(royalblue, 20%),
+//     400: lighten(royalblue, 25%),
+//     300: lighten(royalblue, 30%),
+//     200: lighten(royalblue, 35%),
+//     100: lighten(royalblue, 40%)
+// );
+
+// @function getPrimary($opacity) {
+//     @return map-get($map: $primary, $key: $opacity);
+// }
+
+// .parent {
+//     background-color: getPrimary(500);
+// }
+
+
+
+@for $i from 1 through 100 {
+    .div-#{$i} {
+        width: #{$i}px;
+        margin: 10px;
+        height: 20px;
+        background-color: red;
+        display: inline-block;
+    }
+}
+
+
+.date-picker {
+    margin: 0 auto;
+    padding: 0 10px;
+
+    &__header {
+        display: flex;
+        justify-content: space-between;
+
+        span {
+            font-size: 18px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    }
+
+    &__main {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        gap: 2px;
+    }
+
+    &__weekday-item {
+        font-size: 16   px;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    &__day-item {
+        padding: 10px;
+        aspect-ratio: 1 / 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        background-color: #575757;
+        color: #ffffff;
+        transition: all .3s ease;
+        border-radius: 5px;
+        cursor: pointer;
+
+        &.today {
+            background-color: royalblue;
+
+            &:hover {
+                background-color: rgb(74, 119, 255);
+            }
+        }
+
+        &:hover {
+            background-color: #6d6d6d;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

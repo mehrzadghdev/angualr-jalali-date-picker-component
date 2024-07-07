@@ -26,20 +26,6 @@ $permissions-theme: mat.define-light-theme((color: (primary: $permissions-primar
 
 @import "@angular/material/prebuilt-themes/indigo-pink.css";
 
-@import url("assets/fonts/fonts.scss");
-
-@import "./theme/buttons.scss";
-@import "./theme/dialogs.scss";
-@import "./theme/flexbox.scss";
-@import "./theme/icon-color.scss";
-@import "./theme/material.scss";
-@import "./theme/reset.scss";
-@import "./theme/typography.scss";
-@import "./theme/variables.scss";
-
-@import "./theme/theme-color/default-theme.scss";
-@import "./theme/theme-color/dark-theme.scss";
-
 body {
     color: var(--text-primary-color);
 }
@@ -82,6 +68,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    direction: rtl !important;
     font-family: Vazirmatn, PeydaWeb, sans-serif !important;
 }
 
@@ -316,23 +303,6 @@ mat-nav-list.mobile-buttons-nav-list {
         -webkit-box-shadow: 0px 2px 4px 0px var(--shadow-strong) !important;
     }
 }
-
-@media screen and (max-width: $tablet-break-point) {
-    .desktop-control-buttons {
-        display: none !important;
-    }
-
-    .mobile-control-buttons {
-        display: flex !important;
-    }
-}
-
-@media screen and (max-width: $mobile-break-point) {
-    .main-container {
-        padding: 0 0.5rem;
-    }
-}
-
 .material-icons {
     font-family: 'Material Icons' !important;
 }
@@ -379,4 +349,18 @@ mat-nav-list.mobile-buttons-nav-list {
             background-position: 100% 0;
         }
     }
+} 
+
+* {
+    direction: rtl !important;
 }
+
+body {
+    padding: 20px !important;
+}
+
+.date-picker__wrapper .mat-mdc-menu-content {
+    padding: 0 !important;
+    overflow: hidden;
+}
+

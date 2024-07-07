@@ -7,6 +7,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { LottieModule } from 'ngx-lottie';
+import { MatRippleModule } from '@angular/material/core'
+import { MatMenuModule } from '@angular/material/menu'
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { DatePickerComponent } from './date-picker/date-picker.component'
 
 export function playerFactory() { 
   return import('lottie-web'); 
@@ -14,7 +20,8 @@ export function playerFactory() {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DatePickerComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +29,12 @@ export function playerFactory() {
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    MatRippleModule,
     HttpClientModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatFormFieldModule,
+    MatInputModule,
     LottieModule.forRoot({ player: playerFactory })
   ],
   providers: [],

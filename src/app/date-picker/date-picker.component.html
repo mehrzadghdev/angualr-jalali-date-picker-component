@@ -1,0 +1,29 @@
+<div class="date-picker">
+    <mat-form-field appearance="outline" class="date-picker__form-field">
+        <mat-label><ng-content></ng-content></mat-label>
+        <input [(ngModel)]="dateModel" readonly type="text" matInput placeholder="date">
+        <button matSuffix mat-icon-button [matMenuTriggerFor]="menu">
+            <img style="filter: brightness(0) saturate(100%) invert(55%) sepia(66%) saturate(315%) hue-rotate(171deg) brightness(97%) contrast(96%);" src="assets/calendar.svg" alt="">
+        </button>
+    </mat-form-field>
+    
+    <mat-menu #menu="matMenu" class="date-picker__wrapper" xPosition="before">
+        <div class="date-picker__menu">
+            <div (click)="$event.stopPropagation()" class="date-picker__header">
+                <span (click)="$event.stopPropagation()" mat-ripple (click)="keyDate.subtractMonth()"><</span>
+                <span class="date-picker__date-title" (click)="$event.stopPropagation()">{{ keyDate.monthName }} {{ keyDate.year }}</span>
+                <span (click)="$event.stopPropagation()" mat-ripple (click)="keyDate.addMonth()">></span>
+            </div>
+            <div class="date-picker__main">
+                <div (click)="$event.stopPropagation()" class="date-picker__weekday-item" *ngFor="let weekday of keyDate.weekdayList">{{ weekday | slice: 0 : 1 }}</div>
+                <div (click)="$event.stopPropagation()" *ngFor="let emptyDate of [].constructor(this.keyDate.monthStartWeekDay); let i = index"></div>
+                <div mat-ripple class="date-picker__day-item" [ngClass]="{'today': isToday(i+1)}" (click)="onDateSelected(i+1)" *ngFor="let date of [].constructor(this.keyDate.monthLength); let i = index">
+                    {{i+1}}
+                </div>
+            </div> 
+            <!-- <div class="date-picker__actions">
+                <button mat-button (click)="keyDate.goToday()" (click)="$event.stopPropagation()">today</button>
+            </div>  -->
+        </div>
+    </mat-menu>
+</div>
