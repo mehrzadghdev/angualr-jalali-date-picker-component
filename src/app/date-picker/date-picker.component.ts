@@ -21,7 +21,7 @@ export class DatePickerComponent {
 
   constructor(
   ) {
-    this.keyDate = new KeyDate(new Date());
+    this.keyDate = new KeyDate(this.userDate);
   }
 
   public onDateSelected(date: number): void {

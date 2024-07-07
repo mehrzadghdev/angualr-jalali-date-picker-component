@@ -12,7 +12,7 @@ import { MatMenuModule } from '@angular/material/menu'
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { DatePickerComponent } from './date-picker/date-picker.component'
+import { DatePickerComponent } from './date-picker/date-picker.component';
 
 export function playerFactory() { 
   return import('lottie-web'); 
@@ -21,7 +21,7 @@ export function playerFactory() {
 @NgModule({
   declarations: [
     AppComponent,
-    DatePickerComponent
+    DatePickerComponent,
   ],
   imports: [
     BrowserModule,

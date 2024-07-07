@@ -87,7 +87,7 @@ export class KeyDate {
 
         date.jYear(dateInput.jYear);
         date.jMonth(dateInput.jMonth)
-        date.jDate(dateInput.jDate);
+        date.jDate(dateInput.jDate + 1);
 
         return new Date(date.format('YYYY/MM/DD')).toISOString();
     }
